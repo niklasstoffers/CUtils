@@ -1,6 +1,6 @@
 # FCopy
 Copies one file to another.
-Usage: fcopy <srcfile> <destfile>
+Usage: fcopy <i>file1 file2</i>
 
 Valid file path formats:
 - absolute paths, e.g. /dir/filename.txt
