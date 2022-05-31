@@ -65,7 +65,10 @@ char *combine(const char *dir, const char *file) {
 
 int isAbsPath(const char *p) {
 #if defined(_WIN32) || defined(_WIN64)
-	return PathIsRelativeW(p);
+	size_t s = strlen(p) + 1;
+	wchar_t path[s];
+	mbstowcs(path, p, s);
+	return PathIsRelativeW((LPWSTR)path);
 #else
 	return p[0] == FSEP;
 #endif
