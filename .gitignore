@@ -1,3 +1,7 @@
+# clang ignores
+.clangd/
+compile_commands.json
+
 # Prerequisites
 *.d
 
