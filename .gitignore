@@ -1,7 +1,8 @@
 # clang ignores
 .clangd/
 compile_commands.json
-run
+*/bin/*
+!*/bin/.gitkeep
 
 # Prerequisites
 *.d
