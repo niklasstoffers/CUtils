@@ -4,8 +4,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stddef.h>
+#include <defs.h>
 
-#if defined (_WIN32) || defined(_WIN64)
+#ifdef WIN_OS
 #include <shlwapi.h>
 #endif
 
@@ -32,7 +33,7 @@ int fcopy(const char *p1, const char *p2) {
 	if ((f1 = fopen(p1, "rb")) == NULL)
 		return -1;
 	if ((f2 = fopen(p2, "wb")) == NULL) {
-		free(f1);
+		fclose(f1);
 		return -1;
 	}
 
@@ -64,11 +65,11 @@ char *combine(const char *dir, const char *file) {
 }
 
 int isAbsPath(const char *p) {
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef WIN_OS
 	size_t s = strlen(p) + 1;
 	wchar_t path[s];
 	mbstowcs(path, p, s);
-	return PathIsRelativeW((LPWSTR)path);
+	return !PathIsRelativeW((LPWSTR)path);
 #else
 	return p[0] == FSEP;
 #endif
